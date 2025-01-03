@@ -1,28 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	// 处理根路径请求，返回 PONG
-	if r.URL.Path == "/" {
-		fmt.Fprintf(w, "PONG")
-	} else {
-		http.NotFound(w, r)
-	}
-}
-
 func main() {
-	// 设置路由和处理器
-	http.HandleFunc("/", handler)
+	// 创建一个 Gin 引擎
+	r := gin.Default()
+
+	// 定义路由，监听根路径并返回 PONG
+	r.GET("/", func(c *gin.Context) {
+		c.String(200, "PONG")
+	})
 
 	// 启动服务器，监听 8000 端口
-	log.Println("Server starting on :8000...")
-	if err := http.ListenAndServe(":8000", nil); err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	r.Run(":8000")
 }
 
