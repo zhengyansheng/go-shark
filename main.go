@@ -10,7 +10,7 @@ func main() {
 
 	// 定义路由，监听根路径并返回 PONG
 	r.GET("/", func(c *gin.Context) {
-		c.String(200, "PONG")
+		c.String(200, "PONG - > main")
 	})
 
 	// 启动服务器，监听 8000 端口
